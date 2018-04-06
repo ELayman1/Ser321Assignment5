@@ -140,9 +140,9 @@ Waypoint WaypointCollection::get(string wptName){
    return ret;
 }
 
-bool WaypointCollection::mod(string wptName, double aLat, double aLon, double aEle, string aName, string aAddr){
+bool WaypointCollection::mod(double aLat, double aLon, double aEle, string aName, string aAddr){
    bool r = false;
-   Waypoint modded = wpts[wptName];
+   Waypoint modded = wpts[aName];
 
    modded.lat = aLat;
    modded.lon = aLon;
@@ -150,7 +150,7 @@ bool WaypointCollection::mod(string wptName, double aLat, double aLon, double aE
    modded.name = aName;
    modded.addr = aAddr;
 
-   wpts[wptName] = modded;
+   wpts[aName] = modded;
    return true;
 }
 
@@ -206,15 +206,6 @@ double WaypointCollection::distance(string name1, string name2) {
    double value = (x * x) + (cos(latitude1) * cos(latitude2) * y * y);
    return earthDiameterMeters * atan2(sqrt(value), sqrt(1 - value));
    #endif
-}
-
-std::vector<string> WaypointCollection::getNames(){
-   vector<string> myVec;
-   for(map<string,Waypoint>::iterator it = wpts.begin();it!=wpts.end();++it){
-      myVec.push_back(it->first);
-      cout << it->first << "\n";
-   }
-   return myVec;
 }
 
 void WaypointCollection::printWptCol(){

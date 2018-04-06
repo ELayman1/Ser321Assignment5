@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dependencies>
+   <includePath signature="/I../../../../../usr/local/include /I../../../../../usr/include/jsoncpp">
+      <source file="../../src/cpp/server/Waypoint.cpp" lastModified="16195bf6d30">
+         <include file="../../src/cpp/server/Waypoint.hpp"/>
+         <sysinclude file="../../../../../../../usr/include/stdlib.h"/>
+      </source>
+      <source file="../../src/cpp/server/WaypointCollection.cpp" lastModified="1629d18f7d0">
+         <include file="../../src/cpp/server/WaypointCollection.hpp"/>
+         <sysinclude file="../../../../../../../usr/include/stdlib.h"/>
+         <sysinclude file="../../../../../../../usr/include/math.h"/>
+         <sysinclude file="../../../../../../../usr/include/jsoncpp/json/value.h"/>
+         <sysinclude file="../../../../../../../usr/include/jsoncpp/json/json.h"/>
+         <sysinclude file="../../../../../../../usr/include/jsonrpccpp/server.h"/>
+         <sysinclude file="../../../../../../../usr/include/jsonrpccpp/server/connectors/httpserver.h"/>
+      </source>
+      <source file="../../src/cpp/server/Waypoint.hpp" lastModified="16190a146c0">
+      </source>
+      <source file="../../src/cpp/server/WaypointCollection.hpp" lastModified="1629d18c120">
+         <include file="../../src/cpp/server/Waypoint.hpp"/>
+      </source>
+   </includePath>
+</dependencies>

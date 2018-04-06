@@ -46,9 +46,8 @@ public:
    virtual bool resetFromJsonFile();
    virtual bool add(Waypoint wpt);
    virtual bool remove(Waypoint wpt);
-   virtual bool mod(string wptName, double aLat, double aLon, double aEle, string aName, string aAddr);
+   virtual bool mod(double aLat, double aLon, double aEle, string aName, string aAddr);
    virtual Waypoint get(string wptName);
-   virtual std::vector<string> getNames();
    virtual double bearing(string name1, string name2);
    virtual double distance(string name1, string name2);
    
@@ -64,26 +63,26 @@ WaypointServer::WaypointServer(AbstractServerConnector &connector, int port) :
    portNum = port;
 }
 
-bool WaypointServer::saveToJsonFile(){
-   cout << "Saving collection to waypoints.json" << endl;
+bool WaypointServer::saveToJsonFile() {
+   cout << "Saving collection to waypoints.json " << endl;
    bool ret = library->saveToJsonFile("waypoints.json");
    return ret;
 }
 
-bool WaypointServer::resetFromJsonFile(){
-   cout << "Restoring collection from waypoints.json" << endl;
+bool WaypointServer::resetFromJsonFile() {
+   cout << "Restoring collection from waypoints.json " << endl;
    bool ret = library->resetFromJsonFile("waypoints.json");
    return ret;
 }
 
 bool WaypointServer::add(Waypoint wpt) {
-   cout << "Adding " << wpt << endl;
+   cout << "Adding " << wpt.name << endl;
    bool ret = library->add(wpt);
    return ret;
 }
 
 bool WaypointServer::remove(Waypoint wpt) {
-   cout << "Removing " << wpt << endl;
+   cout << "Removing " << wpt.name << endl;
    bool ret = library->remove(wpt);
    return ret;
 }
@@ -93,18 +92,10 @@ Waypoint WaypointServer::get(string wptName){
    return library->get(wptName);
 }
 
-
-bool WaypointServer::mod(string wptName, double aLat, double aLon, double aEle, string aName, string aAddr) {
-   cout << "Modding " << wptName << endl;
-   bool ret = library->mod(wpt);
+bool WaypointServer::mod(double aLat, double aLon, double aEle, string aName, string aAddr) {
+   cout << "Modding " << aName << endl;
+   bool ret = library->mod(aLat, aLon, aEle, aName, aAddr);
    return ret;
-}
-
-std::vector<string>  WaypointServer::getNames(){
-   Json::FastWriter fw;
-   std::string names = fw.write(library->getNames());
-   cout << "Get names returning: " << names  << endl;
-   return library->getNames();
 }
 
 double WaypointServer::bearing(string name1, string name2) {
@@ -113,7 +104,7 @@ double WaypointServer::bearing(string name1, string name2) {
    return ret;
 }
 
-double WaypointServer::distance(string name1, name2) {
+double WaypointServer::distance(string name1, string name2) {
    cout << "Distance " << name1 << ", " << name2 << endl;
    double ret = library->distance(name1,name2);
    return ret;
@@ -130,10 +121,10 @@ int main(int argc, char * argv[]) {
       port = atoi(argv[1]);
    }
    HttpServer httpserver(port);
-   WaypointServer ss(httpserver, port);
+   WaypointServer ws(httpserver, port);
    std::atexit(exiting);
    auto ex = [] (int i) {cout << "server terminating with signal " << i << endl;
-                         // ss.StopListening();
+                         // ws.StopListening();
                          exit(0);
                          //return 0;
                         };
@@ -148,10 +139,10 @@ int main(int argc, char * argv[]) {
    cout << "Waypoint collection server listening on port " << port
       //<< " press return/enter to quit." << endl;
         << " use ps to get pid. To quit: kill -9 pid " << endl;
-   ss.StartListening();
+   ws.StartListening();
    while(true){
    }
    //int c = getchar();
-   ss.StopListening();
+   ws.StopListening();
    return 0;
 }

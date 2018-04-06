@@ -19,7 +19,7 @@
         "params":[{}],
         "returns": true
     },
-    {   // mod(String, Double, Double, Double, String, String) --> bool
+    {   // mod(Double, Double, Double, String, String) --> bool
         "method": "mod",
         "params":["aString", 2.34, 3.45, 2.34, "aString2", "aString3"],
         "returns": true
@@ -30,12 +30,12 @@
         "returns":[{}]
     },
     {   // bearing(String, String) --> Waypoint
-        "method": "get",
+        "method": "bearing",
         "params":["aString", "aString2"],
         "returns": 2.24
     },
     {   // distance(String, String) --> Waypoint
-        "method": "get",
+        "method": "distance",
         "params":["aString", "aString2"],
         "returns": 2.24
     }

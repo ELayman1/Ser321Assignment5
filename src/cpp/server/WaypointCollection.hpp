@@ -46,8 +46,7 @@ public:
    bool add(Waypoint wpt);
    bool remove(Waypoint wpt);
    Waypoint get(string wptName); //returns a waypoint's json
-   bool mod(string wptName, double aLat, double aLon, double aEle, string aName, string aAddr);
-   std::vector<string> getNames(); //returns a json array of strings
+   bool mod(double aLat, double aLon, double aEle, string aName, string aAddr);
    double degreeToRadian(const double degree);
    double radianToDegree(const double radian);
    double bearing(string name1, string name2);
