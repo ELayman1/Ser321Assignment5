@@ -21,7 +21,7 @@
     },
     {   // mod(Double, Double, Double, String, String) --> bool
         "method": "mod",
-        "params":["aString", 2.34, 3.45, 2.34, "aString2", "aString3"],
+        "params":[2.34, 3.45, 2.34, "aString2", "aString3"],
         "returns": true
     },
     {   // get(String) --> Waypoint
