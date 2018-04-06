@@ -47,8 +47,10 @@ public:
    virtual bool add(Waypoint wpt);
    virtual bool remove(Waypoint wpt);
    virtual bool mod(string wptName, double aLat, double aLon, double aEle, string aName, string aAddr);
-   virtual Waypoint get(Waypoint wpt);
+   virtual Waypoint get(string wptName);
    virtual std::vector<string> getNames();
+   virtual double bearing(string name1, string name2);
+   virtual double distance(string name1, string name2);
    
 private:
    WaypointCollection * library;

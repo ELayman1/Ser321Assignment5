@@ -11,22 +11,32 @@
     },
     {   // add(Waypoint) --> bool
         "method": "add",
-        "params":[{ }],
+        "params":[{}],
         "returns": true
     },
     {   // remove(Waypoint) --> bool
         "method": "remove",
-        "params":[],
+        "params":[{}],
         "returns": true
     },
-    {   // mod(Waypoint) --> bool
+    {   // mod(String, Double, Double, Double, String, String) --> bool
         "method": "mod",
-        "params":[],
+        "params":["aString", 2.34, 3.45, 2.34, "aString2", "aString3"],
         "returns": true
     },
-    {   // get(string) --> Waypoint
+    {   // get(String) --> Waypoint
         "method": "get",
-        "params":[],
-        "returns":""
+        "params":["aString"],
+        "returns":[{}]
+    },
+    {   // bearing(String, String) --> Waypoint
+        "method": "get",
+        "params":["aString", "aString2"],
+        "returns": 2.24
+    },
+    {   // distance(String, String) --> Waypoint
+        "method": "get",
+        "params":["aString", "aString2"],
+        "returns": 2.24
     }
 ]
