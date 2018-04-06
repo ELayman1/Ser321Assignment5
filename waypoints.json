@@ -1,0 +1,72 @@
+{
+   "ASU-Brickyard": {
+      "lon": -111.9389,
+      "address": "",
+      "name": "ASU-Brickyard",
+      "lat": 33.4235,
+      "ele": 1300
+   },
+   "Calgary-Alberta": {
+      "lon": -114.0581,
+      "address": "",
+      "name": "Calgary-Alberta",
+      "lat": 51.0453,
+      "ele": 1048
+   },
+   "Salt-Lake-City-UT": {
+      "lon": -111.891,
+      "address": "",
+      "name": "Salt-Lake-City-UT",
+      "lat": 40.7608,
+      "ele": 4226
+   },
+   "Moscow-Russia": {
+      "lon": 37.6167,
+      "address": "",
+      "name": "Moscow-Russia",
+      "lat": 55.75,
+      "ele": 495
+   },
+   "ASU-Poly": {
+      "lon": -111.6788,
+      "address": "7171 E Sonoran Arroyo Mall\nPeralta Hall 230\nMesa AZ 85212",
+      "name": "ASU-Poly",
+      "lat": 33.3056,
+      "ele": 1300
+   },
+   "Barrow-Alaska": {
+      "lon": -156.7664,
+      "address": "",
+      "name": "Barrow-Alaska",
+      "lat": 71.2956,
+      "ele": 10
+   },
+   "London-England": {
+      "lon": 0.1275,
+      "address": "",
+      "name": "London-England",
+      "lat": 51.5072,
+      "ele": 79
+   },
+   "Paris-France": {
+      "lon": 2.3508,
+      "address": "",
+      "name": "Paris-France",
+      "lat": 48.8567,
+      "ele": 115
+   },
+   "Anchorage-Alaska": {
+      "lon": -149.9,
+      "address": "",
+      "name": "Anchorage-Alaska",
+      "lat": 61.2167,
+      "ele": 102
+   },
+   "New-York-NY": {
+      "lon": -74.0059,
+      "address": "",
+      "name": "New-York-NY",
+      "lat": 40.7127,
+      "ele": 85
+   }
+}

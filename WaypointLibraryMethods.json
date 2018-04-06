@@ -1,0 +1,32 @@
+[
+    {
+        "method": "saveToJsonFile",
+        "params":[ ],
+        "returns": true
+    },
+    {
+        "method": "resetFromJsonFile",
+        "params":[ ],
+        "returns": true
+    },
+    {   // add(Waypoint) --> bool
+        "method": "add",
+        "params":[{ }],
+        "returns": true
+    },
+    {   // remove(Waypoint) --> bool
+        "method": "remove",
+        "params":[],
+        "returns": true
+    },
+    {   // mod(Waypoint) --> bool
+        "method": "mod",
+        "params":[],
+        "returns": true
+    },
+    {   // get(string) --> Waypoint
+        "method": "get",
+        "params":[],
+        "returns":""
+    }
+]
