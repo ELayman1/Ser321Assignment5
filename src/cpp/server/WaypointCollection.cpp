@@ -1,23 +1,15 @@
 #include "WaypointCollection.hpp"
 
 #include <iostream>
-#include <vector>
-#include <string>
-#include <sstream>
 #include <stdlib.h>
-#include <string>
-#include <map>
-#include <vector>
 #include <cmath>
-#include <iomanip>
-#include <math.h>
-
-#include <jsoncpp/json/value.h>
-#include <jsoncpp/json/json.h>
+#include <stdio.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
 #include <jsonrpccpp/server.h>
 #include <jsonrpccpp/server/connectors/httpserver.h>
-#include <fstream>
-
 /**
  * Copyright 2018 Tim Lindquist,
  *
@@ -121,9 +113,9 @@ bool WaypointCollection::saveToJsonFile(string jsonFileName){
    return r;
 }
 
-bool WaypointCollection::add(const Json::Value& aWaypoint){
+bool WaypointCollection::add(const Json::Value& wptName){
    bool ret = false;
-   Waypoint aWaypoint(aWaypoint);
+   Waypoint aWaypoint(wptName);
    library[aWaypoint.name]=aWaypoint;
    return true;
 }

@@ -28,10 +28,7 @@
 #include <string>
 #include <map>
 #include <vector>
-#include <jsoncpp/json/value.h>
 #include <jsoncpp/json/json.h>
-
-#include <json/json.h>
 
 using namespace std;
 

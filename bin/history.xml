@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="gcc -L../../../../../../usr/lib -ljsoncpp -ljsonrpccpp-server -ljsonrpccpp-common -lmicrohttpd -lstdc++ -lm">
+      <target file="waypointRPCServer" lastModified="162a1a84008">
+         <source file="../obj/server/WaypointServer.o" lastModified="162a1a83c20"/>
+         <source file="../obj/server/Waypoint.o" lastModified="162a1a83c20"/>
+         <source file="../obj/server/WaypointCollection.o" lastModified="162a1a84008"/>
+      </target>
+   </processor>
+</history>

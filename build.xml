@@ -116,7 +116,7 @@
             <property name="cxxflag" value="-std=c++14"/>
             <property name="includepath" value="/opt/local/include:/usr/local/include"/>
             <property name="client.lib.path" value="/opt/local/lib"/>
-            <property name="client.lib.list" value="c++,jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++"/>
+            <property name="client.lib.list" value="c++,jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd"/>
             <property name="server.lib.path" value="/opt/local/lib"/>
             <property name="server.lib.list" value="c++,jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd"/>
          </then>
@@ -125,11 +125,11 @@
          <then>
             <echo message="detected a linux host"/>
             <property name="cxxflag" value="-std=c++14"/>
-            <property name="includepath" value="/usr/local/include:/usr/include/jsoncpp"/>
-            <property name="client.lib.path" value="/usr/local/lib"/>
-            <property name="client.lib.list" value="jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++"/>
-            <property name="server.lib.path" value="/usr/local/lib"/>
-            <property name="server.lib.list" value="jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,stdc++"/>
+            <property name="includepath" value="/usr/local/include,/usr/include/jsoncpp,/usr/lib/x86_64-linux-gnu"/>
+            <property name="client.lib.path" value="/usr/lib"/>
+            <property name="client.lib.list" value="jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++,m"/>
+            <property name="server.lib.path" value="/usr/lib"/>
+            <property name="server.lib.list" value="jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,stdc++,m"/>
          </then>
       </elseif>
       <else>
@@ -160,7 +160,7 @@
             <pathelement path="${includepath}"/>
          </includepath>
          <libset dir="${client.lib.path}" libs="${client.lib.list}"/>
-         <fileset dir="${src.dir}/cpp/client" includes="Controller.cpp, "/>
+         <fileset dir="${src.dir}/cpp/client" includes="Controller.cpp, WaypointGUI.cpp"/>
          <fileset dir="${src.dir}/cpp/server" includes="WaypointCollection.cpp, Waypoint.cpp"/>
       </cc>
    </target>

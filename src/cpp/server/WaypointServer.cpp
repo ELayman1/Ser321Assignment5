@@ -26,7 +26,7 @@
 
 #include <jsonrpccpp/server.h>
 #include <jsonrpccpp/server/connectors/httpserver.h>
-#include <json/json.h>
+#include <jsoncpp/json/json.h>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
