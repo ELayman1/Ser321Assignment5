@@ -16,10 +16,10 @@
 
 #include <sstream>
 #include <jsonrpccpp/client/connectors/httpclient.h>
-#include <json/json.h>
+#include <jsoncpp/json/json.h>
 #include "waypointcollectionstub.h"
 
-#include "../server/Waypoint.hpp"
+#include "../server/WaypointCollection.hpp"
 
 using namespace jsonrpc;
 using namespace std;
@@ -88,9 +88,7 @@ class Controller : public WaypointGUI {
 	    theWPChoice2->menubutton()->remove(i);
             cout << "Removed " << selected << std::endl;
 	    string wptName = theWPChoice->value();
-            Waypoint temp;
-	    temp = aLib.get(wptName);
-            aLib.remove(temp);
+            aLib.remove(wptName);
             break;
          }
 	 
@@ -144,7 +142,7 @@ class Controller : public WaypointGUI {
       temp.lat = latNum;
       temp.ele = eleNum;
 
-      aLib.add(temp);
+      aLib.mod(latNum,lonNum,eleNum,name,addr);
 
       fromWPChoice->add(name.c_str());
       toWPChoice->add(name.c_str());
@@ -249,7 +247,7 @@ class Controller : public WaypointGUI {
       aLib.resetFromJsonFile("waypoints.json");
       std::cout << endl << "Done initializing from waypoints.json" << endl; 
 
-      for(map<string,Waypoint>::iterator it = aLib.wpts.begin();it!=aLib.wpts.end();++it){
+      for(map<string,Waypoint>::iterator it = aLib.library.begin();it!=aLib.library.end();++it){
 	  //cout << "key " << it->first << endl;
 	  string wptName = it->first;
           fromWPChoice->add(wptName.c_str());

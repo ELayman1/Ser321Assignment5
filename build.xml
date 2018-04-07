@@ -6,8 +6,10 @@
    <property name="dist.dir" value="bin"/>
    <property name="classes.dir" value="classes"/>
    <property name="obj.dir" value="obj"/>
+<!--
    <property name="host.name" value="127.0.0.1"/>
    <property name="port.num" value="8080"/>
+-->
    <property name="json.file.name" value="WaypointLibraryMethods.json"/>
    <property environment="env"/>
    <!--Set the ostype property: <property name="ostype" value="${env.OSTYPE}"/>-->
@@ -31,11 +33,9 @@
     </condition>
 
    <target name="targets">
-      <echo message="Targets are clean, prepare, build.all, generate.server.stub, build.server, generate.client.stub, build.client, build.java.client, targets"/>
-      <echo message="base directory is: ${basedir} and ostype is ${ostype}"/>
-      <echo message="execute cpp server with: ./bin/waypointRPCServer ${port.num}"/>
-      <echo message="execute cpp client with: ./bin/waypointRPCClient http://${host.name}:${port.num}"/>
-      <echo message="invoke java http client with: java -cp classes:lib/json.jar sample.waypoint.client.WaypointCollectionClient ${host.name} ${port.num}"/>
+      <echo message="Targets are clean, prepare, build.all, generate.server.stub, build.cpp.server, generate.client.stub, build.cpp.client, build.java.client, targets"/>
+      <echo message="Base directory is: ${basedir} and ostype is ${ostype}"/>
+      <echo message="Invoke java http client with: java -cp classes:lib/json.jar sample.waypoint.client.WaypointCollectionClient ${host.name} ${port.num}"/>
       
    </target>
 
@@ -127,7 +127,7 @@
             <property name="cxxflag" value="-std=c++14"/>
             <property name="includepath" value="/usr/local/include,/usr/include/jsoncpp,/usr/lib/x86_64-linux-gnu"/>
             <property name="client.lib.path" value="/usr/lib"/>
-            <property name="client.lib.list" value="jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++,m"/>
+            <property name="client.lib.list" value="jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++,m,fltk"/>
             <property name="server.lib.path" value="/usr/lib"/>
             <property name="server.lib.list" value="jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,stdc++,m"/>
          </then>
@@ -139,7 +139,7 @@
    </target>
 
    <target name="build.all"
-           depends="clean,prepare,build.server,build.client,build.java.client"
+           depends="clean,prepare,build.cpp.server,build.cpp.client,build.java.client"
            description="Clean then build cpp server, cpp client and java client"/>
 
    <target name="generate.client.stub" depends="prepare">
@@ -151,7 +151,7 @@
       <delete file="waypointcollectionstub.h"/>
    </target>
 
-   <target name="build.client" depends="generate.client.stub">
+   <target name="build.cpp.client" depends="generate.client.stub">
       <cc outtype="executable" subsystem="console"
           outfile="${dist.dir}/waypointRPCClient"
           objdir="${obj.dir}/client">
@@ -174,7 +174,7 @@
       <delete file="waypointserverstub.h"/>
    </target>
 
-   <target name="build.server" depends="generate.server.stub">
+   <target name="build.cpp.server" depends="generate.server.stub">
      <cc outtype="executable" subsystem="console"
          outfile="${dist.dir}/waypointRPCServer"
          objdir="${obj.dir}/server">
@@ -188,7 +188,6 @@
                   includes="Waypoint.cpp, WaypointCollection.cpp, WaypointServer.cpp"/>
       </cc>
    </target>
-
    
    <target name="build.java.client" depends="prepare"
           description="Compile Java client sources">
@@ -199,6 +198,16 @@
             includeantruntime="false">
         <classpath refid="compile.classpath"/>
      </javac>
+   </target>
+
+<target name="execute.cpp.server" depends="build.cpp.server">
+      <input message="Enter the port number you are trying to connect to: (portNumber)"        addProperty="port.num"/>
+      <exec executable="./bin/waypointRPCServer ${port.num}"/>
+   </target>
+
+   <target name="execute.cpp.client" depends="build.cpp.client">
+      <input message="Enter http you are trying to connect to: (http://hostName:portNumber)" addProperty = "http"/>
+      <exec executable="./bin/waypointRPCClient ${http}"/>
    </target>
 
 </project>
