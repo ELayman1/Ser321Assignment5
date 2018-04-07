@@ -1,5 +1,4 @@
 #include "WaypointGUI.cpp"
-#include "WaypointCollection.cpp"
 
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
@@ -19,6 +18,7 @@
 #include <jsonrpccpp/client/connectors/httpclient.h>
 #include <json/json.h>
 #include "waypointcollectionstub.h"
+
 #include "../server/Waypoint.hpp"
 
 using namespace jsonrpc;
@@ -190,7 +190,7 @@ class Controller : public WaypointGUI {
 
       string wptName = fromWPChoice->value();
 
-      aLib.mod(wptName,latNum,lonNum,eleNum,name,addr);
+      aLib.mod(latNum,lonNum,eleNum,wptName,addr);
    }
 
    static void ClickedDistanceAndBearing(Fl_Widget * w, void * userdata) {
@@ -293,7 +293,7 @@ int main(int argc, char*argv[]) {
       host = string(argv[1]);
    }
    HttpClient httpclient(host);
-   studentcollectionstub sc(httpclient);
+   waypointcollectionstub sc(httpclient);
    cout << "Connecting to host " << host << endl;
    try {
       string inLine;

@@ -160,8 +160,8 @@
             <pathelement path="${includepath}"/>
          </includepath>
          <libset dir="${client.lib.path}" libs="${client.lib.list}"/>
-         <fileset dir="${src.dir}/cpp/client" includes="Controller.cpp"/>
-         <fileset dir="${src.dir}/cpp/server" includes="Waypoint.cpp"/>
+         <fileset dir="${src.dir}/cpp/client" includes="Controller.cpp, "/>
+         <fileset dir="${src.dir}/cpp/server" includes="WaypointCollection.cpp, Waypoint.cpp"/>
       </cc>
    </target>
 

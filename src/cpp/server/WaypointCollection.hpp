@@ -1,3 +1,4 @@
+#include "Waypoint.hpp"
 /**
  * Copyright 2016 Tim Lindquist,
  *
@@ -24,10 +25,13 @@
  * @version July 2016
  */
 
-#include "Waypoint.hpp"
 #include <string>
 #include <map>
 #include <vector>
+#include <jsoncpp/json/value.h>
+#include <jsoncpp/json/json.h>
+
+#include <json/json.h>
 
 using namespace std;
 
@@ -36,16 +40,16 @@ class WaypointCollection {
 public:
    WaypointCollection();
    ~WaypointCollection();
-   std::map<std::string, Waypoint> wpts;
+   std::map<std::string, Waypoint> library;
    string name;
    const double PI = 3.14;
    const double earthDiameterMeters = 12742000;
 
    bool resetFromJsonFile(string jsonFileName);
    bool saveToJsonFile(string jsonFileName);
-   bool add(Waypoint wpt);
-   bool remove(Waypoint wpt);
-   Waypoint get(string wptName); //returns a waypoint's json
+   bool add(const Json::Value& wptName);
+   bool remove(string wptName);
+   //Json::Value get(string wptName); //returns a waypoint's json
    bool mod(double aLat, double aLon, double aEle, string aName, string aAddr);
    double degreeToRadian(const double degree);
    double radianToDegree(const double radian);

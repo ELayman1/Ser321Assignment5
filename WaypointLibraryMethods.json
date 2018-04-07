@@ -16,18 +16,13 @@
     },
     {   // remove(Waypoint) --> bool
         "method": "remove",
-        "params":[{}],
+        "params":["aString"],
         "returns": true
     },
     {   // mod(Double, Double, Double, String, String) --> bool
         "method": "mod",
         "params":[2.34, 3.45, 2.34, "aString2", "aString3"],
         "returns": true
-    },
-    {   // get(String) --> Waypoint
-        "method": "get",
-        "params":["aString"],
-        "returns":[{}]
     },
     {   // bearing(String, String) --> Waypoint
         "method": "bearing",

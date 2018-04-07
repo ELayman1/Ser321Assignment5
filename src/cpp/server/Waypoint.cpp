@@ -29,7 +29,9 @@
  * @version January 2018
  */
 Waypoint::Waypoint(){
-   lat = lon = ele = 0;
+   lat = 0;
+   lon =  0;
+   ele = 0;
    name = "";
    addr = "";
 }
@@ -42,9 +44,36 @@ Waypoint::Waypoint(double aLat, double aLon, double anElevation, string aName, s
    addr = aAddr;
 }
 
+Waypoint::Waypoint(const Json::Value& jsonObj){
+   string latStr = "lat";
+   string lonStr = "lon";
+   string eleStr = "ele";
+   string nameStr = "name";
+   string addrStr = "addr";
+   Json::Value::Members mbr = jsonObj.getMemberNames();
+       for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
+           Json::Value jsonM = jsonObj[*i];
+           if(latStr.compare(*i)==0){
+              lat = jsonM.asDouble();
+           }else if(lonStr.compare(*i)==0){
+              lon = jsonM.asDouble();
+           }else if(eleStr.compare(*i)==0){
+              ele = jsonM.asDouble();
+           }else if(nameStr.compare(*i)==0){
+              name = jsonM.asString();
+           }else if(addrStr.compare(*i)==0){
+              addr = jsonM.asString();
+           }
+       }
+}
+
 Waypoint::~Waypoint() {
    //cout << "Waypoint destructor.\n";
-   lat=lon=ele=0; name=""; addr="";
+   lat=0;
+   lon=0;
+   ele=0; 
+   name=""; 
+   addr="";
 }
 
 void Waypoint::setValues(double aLat, double aLon, double anElevation,
@@ -54,6 +83,16 @@ void Waypoint::setValues(double aLat, double aLon, double anElevation,
    ele = anElevation;
    name = aName;
    addr = aAddr;
+}
+
+Json::Value Waypoint::toJson(){
+   Json::Value jsonLib;
+   jsonLib["lat"] = lat;
+   jsonLib["lon"] = lon;
+   jsonLib["ele"] = ele;
+   jsonLib["name"] = name;
+   jsonLib["addr"] = addr;
+   return jsonLib;
 }
 
 double Waypoint::distanceGCTo(Waypoint wp, int scale){

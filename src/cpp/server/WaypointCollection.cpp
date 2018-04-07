@@ -50,7 +50,7 @@ WaypointCollection::WaypointCollection(){
 
 WaypointCollection::~WaypointCollection() {
    //cout << "WaypointCollection destructor.\n";
-   wpts.clear();
+   library.clear();
 }
 
 bool WaypointCollection::resetFromJsonFile(string jsonFileName){
@@ -90,7 +90,7 @@ bool WaypointCollection::resetFromJsonFile(string jsonFileName){
             //cout << " Waypoint: " << name << "lat: " << lat << "lon: " << lon << endl;
             Waypoint * wpt = new Waypoint(lat,lon,ele,name,addr);
             //waypoint->print();
-            wpts[*i] = *wpt;
+            library[*i] = *wpt;
          }
       }
       r = true;
@@ -102,11 +102,11 @@ bool WaypointCollection::saveToJsonFile(string jsonFileName){
    bool r = false;
    Json::Value jsonLib;
    jsonLib["name"] = name;
-   for(std::map<string,Waypoint>::iterator i = wpts.begin(); i!= wpts.end(); i++){
+   for(std::map<string,Waypoint>::iterator i = library.begin(); i!= library.end(); i++){
       string key = i->first;
       //cout << key << " " << endl;
       Json::Value jsonWpt;
-      Waypoint wpt = wpts[key];
+      Waypoint wpt = library[key];
       jsonWpt["name"] = wpt.name;
       jsonWpt["address"] = wpt.addr;
       jsonWpt["lon"] = wpt.lon;
@@ -121,28 +121,36 @@ bool WaypointCollection::saveToJsonFile(string jsonFileName){
    return r;
 }
 
-bool WaypointCollection::add(Waypoint wpt){
-   bool r = false;
-   wpts[wpt.name]=wpt;
-   r = true;
-   return r;
+bool WaypointCollection::add(const Json::Value& aWaypoint){
+   bool ret = false;
+   Waypoint aWaypoint(aWaypoint);
+   library[aWaypoint.name]=aWaypoint;
+   return true;
 }
 
-bool WaypointCollection::remove(Waypoint wpt){
-   bool r = false;
-   wpts.erase(wpt.name);
-   r = true;
-   return r;
+bool WaypointCollection::remove(string wptName){
+   bool ret = false;
+    if(library.count(wptName)>0){
+      library.erase(wptName);
+      ret = true;
+   }
+   return true;
 }
 
-Waypoint WaypointCollection::get(string wptName){
-   Waypoint ret = wpts[wptName];
-   return ret;
+/*
+Json::Value WaypointCollection::get(string wptName){
+   Waypoint ret = library[wptName];
+   Waypoint aWaypoint("{\"name\":\""+wptName+",\"lat\":\""+ret.lat+",\"lon\":\""+ret.lon+",\"ele\":\""+ret.ele+",\"addr\":\""+ret.addr+"}");
+   if(library.count(wptName)>0){
+         aWaypoint = library[wptName];
+   }
+   return aWaypoint.toJson();
 }
+*/
 
 bool WaypointCollection::mod(double aLat, double aLon, double aEle, string aName, string aAddr){
    bool r = false;
-   Waypoint modded = wpts[aName];
+   Waypoint modded = library[aName];
 
    modded.lat = aLat;
    modded.lon = aLon;
@@ -150,7 +158,7 @@ bool WaypointCollection::mod(double aLat, double aLon, double aEle, string aName
    modded.name = aName;
    modded.addr = aAddr;
 
-   wpts[aName] = modded;
+   library[aName] = modded;
    return true;
 }
 
@@ -165,8 +173,8 @@ double WaypointCollection::radianToDegree (const double radian) {
  
 
 double WaypointCollection::bearing(string name1, string name2) {
-   Waypoint fromWpt = wpts[name1];
-   Waypoint toWpt = wpts[name2];
+   Waypoint fromWpt = library[name1];
+   Waypoint toWpt = library[name2];
    double latitude1 = fromWpt.lat;
    double longitude1 = fromWpt.lon;
    double latitude2 = toWpt.lat;
@@ -186,8 +194,8 @@ double WaypointCollection::bearing(string name1, string name2) {
 }
 
 double WaypointCollection::distance(string name1, string name2) {
-   Waypoint fromWpt = wpts[name1];
-   Waypoint toWpt = wpts[name2];
+   Waypoint fromWpt = library[name1];
+   Waypoint toWpt = library[name2];
    double latitude1 = fromWpt.lat;
    double longitude1 = fromWpt.lon;
    double latitude2 = toWpt.lat;
@@ -210,7 +218,7 @@ double WaypointCollection::distance(string name1, string name2) {
 
 void WaypointCollection::printWptCol(){
    cout << "Waypoint Collection: " << name << " has waypoints" << endl;
-   for(map<string,Waypoint>::iterator it = wpts.begin();it!=wpts.end();++it){
+   for(map<string,Waypoint>::iterator it = library.begin();it!=library.end();++it){
       cout << "key " << it->first << " is ";
       (it->second).print();
    }

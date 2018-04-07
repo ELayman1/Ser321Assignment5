@@ -44,12 +44,12 @@ public:
    WaypointServer(AbstractServerConnector &connector, int port);
    virtual bool saveToJsonFile();
    virtual bool resetFromJsonFile();
-   virtual bool add(Waypoint wpt);
-   virtual bool remove(Waypoint wpt);
-   virtual bool mod(double aLat, double aLon, double aEle, string aName, string aAddr);
-   virtual Waypoint get(string wptName);
-   virtual double bearing(string name1, string name2);
-   virtual double distance(string name1, string name2);
+   virtual bool add(const Json::Value& wptName);
+   virtual bool remove(const string&  wptName);
+   virtual bool mod(double aLat, double aLon, double aEle, const std::string& aName, const std::string& aAddr);
+   //virtual Json::Value get(const std::string& wptName);
+   virtual double bearing(const std::string& name1, const std::string& name2);
+   virtual double distance(const std::string& name1, const std::string& name2);
    
 private:
    WaypointCollection * library;
@@ -75,36 +75,31 @@ bool WaypointServer::resetFromJsonFile() {
    return ret;
 }
 
-bool WaypointServer::add(Waypoint wpt) {
-   cout << "Adding " << wpt.name << endl;
-   bool ret = library->add(wpt);
+bool WaypointServer::add(const Json::Value& wptName) {
+   cout << "Adding " << wptName << endl;
+   bool ret = library->add(wptName);
    return ret;
 }
 
-bool WaypointServer::remove(Waypoint wpt) {
-   cout << "Removing " << wpt.name << endl;
-   bool ret = library->remove(wpt);
+bool WaypointServer::remove(const string& wptName) {
+   cout << "Removing " << wptName << endl;
+   bool ret = library->remove(wptName);
    return ret;
 }
 
-Waypoint WaypointServer::get(string wptName){
-   cout << "Getting " << wptName << endl;
-   return library->get(wptName);
-}
-
-bool WaypointServer::mod(double aLat, double aLon, double aEle, string aName, string aAddr) {
+bool WaypointServer::mod(double aLat, double aLon, double aEle, const string& aName, const string& aAddr) {
    cout << "Modding " << aName << endl;
    bool ret = library->mod(aLat, aLon, aEle, aName, aAddr);
    return ret;
 }
 
-double WaypointServer::bearing(string name1, string name2) {
+double WaypointServer::bearing(const string& name1, const string& name2) {
    cout << "Bearing " << name1 << ", " << name2  << endl;
    double ret = library->bearing(name1,name2);
    return ret;
 }
 
-double WaypointServer::distance(string name1, string name2) {
+double WaypointServer::distance(const string& name1, const string& name2) {
    cout << "Distance " << name1 << ", " << name2 << endl;
    double ret = library->distance(name1,name2);
    return ret;

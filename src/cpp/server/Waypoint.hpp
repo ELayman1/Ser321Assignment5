@@ -1,6 +1,10 @@
 #include <string>
 #include <cmath>
 
+#include <json/json.h>
+#include <vector>
+
+
 using namespace std;
 
 /**
@@ -50,8 +54,10 @@ public:
 
    Waypoint();
    Waypoint(double aLat, double aLon, double anElevation, string aName, string aAddr);
+   Waypoint(const Json::Value& jsonObj);
    ~Waypoint();
    void setValues(double aLat, double aLon, double anElevation, string aName, string aAddr);
+   Json::Value toJson();
    double distanceGCTo(Waypoint wp, int scale);
    double bearingGCInitTo(Waypoint wp, int scale);
    void print();
